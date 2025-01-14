@@ -24,6 +24,7 @@ xxd -i "$1" | sed "s/${new_filename}/$xxd_name/g; s/${new_filename}_len/${xxd_na
 # 4.开始编译
 echo "开始编译...";
 "$script_directory"/musl/obj/musl-gcc \
+-static \
 "$script_directory"/build.c -o "$2" \
 -I"$script_directory"/buildroot/include/php \
 -I"$script_directory"/buildroot/include/php/main \
