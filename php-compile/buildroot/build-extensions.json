@@ -1,0 +1,8 @@
+[
+    "ctype",
+    "fileinfo",
+    "mbstring",
+    "tokenizer",
+    "zlib",
+    "phar"
+]
