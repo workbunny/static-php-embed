@@ -45,6 +45,9 @@ PHP_FUNCTION(demo02)
     {
         RETURN_NULL();
     }
+
+    // 你的逻辑
+
     // 返回字符串
     RETURN_STRING(string_param);
 }
