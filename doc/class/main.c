@@ -8,6 +8,9 @@ int main(int argc, char **argv)
     // 注册
     register_class();
 
+    // 执行代码
+    // zend_eval_string("$obj = new MyPhpClass(); echo $obj->myMethod(10);", NULL, "index");
+
     // PHP文件
     zend_file_handle file_handle;
     // 执行文件

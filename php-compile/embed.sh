@@ -1,4 +1,12 @@
 script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# 2.是否安装了musl-gcc
+file="/usr/local/musl/lib/musl-gcc.specs"
+if [ ! -f "$file" ]; then
+    echo "首次编译准备动作...";
+    cd "$script_directory"/musl;
+    make install;
+    cd "$script_directory"
+fi
 echo "开始编译...";
 "$script_directory"/musl/obj/musl-gcc \
 -static \
