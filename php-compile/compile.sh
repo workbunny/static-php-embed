@@ -1,27 +1,42 @@
+#!/bin/bash
+
 # 1.运行目录
+
 script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # 2.是否安装了musl-gcc
+
 file="/usr/local/musl/lib/musl-gcc.specs"
 if [ ! -f "$file" ]; then
     echo "首次编译准备动作...";
-    cd "$script_directory"/musl;
+    cd "$script_directory"/musl
     make install;
     cd "$script_directory"
-fi
+fi;
+
 # 3.将PHP文件转化为C文件
+
 # 获取文件名（不带扩展名）和扩展名
-filename="${1%.*}"  # 移除最后一个点及其后面的所有内容，即移除扩展名
-extension="${1##*.}"  # 获取最后一个点之后的内容，即获取扩展名
+
+# 移除最后一个点及其后面的所有内容，即移除扩展名
+filename="${1%.*}"
+
+# 获取最后一个点之后的内容，即获取扩展名
+extension="${1##*.}"
 
 # 检查是否确实有扩展名存在
 if [ "$filename" != "$1" ] && [ -n "$extension" ]; then
     new_filename="${filename}_${extension}"
 else
-    new_filename="$1"  # 如果没有扩展名，则保持原样
-fi
+# 如果没有扩展名，则保持原样
+    new_filename="$1"  
+fi;
+
 xxd_name="index_php"
 xxd -i "$1" | sed "s/${new_filename}/$xxd_name/g; s/${new_filename}_len/${xxd_name}_len/g" > ${script_directory}/datafile.c;
+
 # 4.开始编译
+
 echo "开始编译...";
 "$script_directory"/musl/obj/musl-gcc \
 -static \

@@ -6,7 +6,8 @@ int main(int argc, char **argv)
     PHP_EMBED_START_BLOCK(argc, argv)
 
     // 注册
-    register_class();
+    // register_class();
+    zend_startup_module_ex(&MyPhpClass_module_entry);
 
     // 执行代码
     // zend_eval_string("$obj = new MyPhpClass(); echo $obj->myMethod(10);", NULL, "index");
